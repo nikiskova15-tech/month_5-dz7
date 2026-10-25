@@ -21,7 +21,7 @@ export default function RegisterPage() {
                     changes: product,
                 });
             }
-            return register( name, email, password, avatar );
+            return register(name, email, password, avatar);
         },
         onSuccess: () => {
             setName("")
