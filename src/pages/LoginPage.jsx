@@ -4,19 +4,27 @@ import { Link } from "react-router-dom";
 export default function LoginPage() {
 
 
-    
+
     return (
         <section style={{ maxWidth: 380 }}>
             <h1>Вход</h1>
 
             <form>
-                <input 
-                type="email" 
-                autoComplete="email" />
+                <input
+                    value={email}
+                    type="email"
+                    placeholder="Почта"
+                    autoComplete="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    required />
 
-                <input 
-                type="password" 
-                autoComplete="current-password" />
+                <input
+                    value={password}
+                    type="password"
+                    placeholder="Пароль"
+                    autoComplete="current-password"
+                    onChange={(event) => setPassword(event.target.value)}
+                    required />
 
                 <p>Ошибка от сервера</p>
 

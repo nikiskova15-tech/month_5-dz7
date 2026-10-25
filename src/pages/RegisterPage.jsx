@@ -63,7 +63,8 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit}>
                 <input
                     value={name}
-                    placeholder="Name"
+                    type='text'
+                    placeholder="Имя"
                     autoComplete="name"
                     onChange={(event) => setName(event.target.value)}
                     required />
@@ -71,6 +72,7 @@ export default function RegisterPage() {
                 <input
                     value={email}
                     type="email"
+                    placeholder="Почта"
                     autoComplete="email"
                     onChange={(event) => setEmail(event.target.value)}
                     required />
@@ -78,6 +80,7 @@ export default function RegisterPage() {
                 <input
                     value={password}
                     type="password"
+                    placeholder="Пароль"
                     autoComplete="new-password"
                     onChange={(event) => setPassword(event.target.value)}
                     required />
