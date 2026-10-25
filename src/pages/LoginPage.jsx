@@ -14,8 +14,8 @@ export default function LoginPage() {
         try {
             await loginMutation.mutateAsync({ email, password });
             navigate("/profile", { replace: true });
-        } catch (e) {
-            console.log(e.message);
+        } catch {
+            return null
         }
     };
 
@@ -24,7 +24,7 @@ export default function LoginPage() {
             <h1>Вход</h1>
 
             <form onSubmit={handleSubmit}
-            style={{ display: 'flex', flexDirection: 'column', maxWidth: 500, gap: 15 }}>
+                style={{ display: 'flex', flexDirection: 'column', maxWidth: 500, gap: 15 }}>
                 <input
                     value={email}
                     type="email"

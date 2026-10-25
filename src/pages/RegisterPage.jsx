@@ -35,8 +35,8 @@ export default function RegisterPage() {
                 password: password.trim(),
                 avatar: avatar.trim(),
             });
-        } catch (e) {
-            console.log(e.message);
+        } catch {
+            return null
         }
     }
 
