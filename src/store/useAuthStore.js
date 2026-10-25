@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-
-
 export const useAuthStore = create(
     persist( // сохраняем все состояния в localStorage
         (set) => ({

@@ -2,7 +2,6 @@
 const BASE_URL = "https://api.escuelajs.co/api/v1"
 
 
-
 export async function login({ email, password }) {
     const res = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",

@@ -82,7 +82,7 @@ export default function ProfilePage() {
                 }}
             >
                 <h3>Данные access token</h3>
-                <p><b>ID пользователя:</b>{tokenData?.sub ?? "Нет данных"}</p>
+                <p><b>ID пользователя:</b>{tokenData?.sub}</p>
                 <p><b>Выдан:</b> {formatDate(tokenData?.iat)}</p>
                 <p><b>Истекает:</b> {formatDate(tokenData?.exp)}</p>
             </div>

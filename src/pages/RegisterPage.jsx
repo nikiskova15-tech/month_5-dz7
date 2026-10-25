@@ -93,7 +93,6 @@ export default function RegisterPage() {
                 {(error || registerMutation.isError) && (
                     <p style={{ color: "red" }}>
                         {error}
-                        console.log({error && registerMutation.isError});
                     </p>
                 )}
 
