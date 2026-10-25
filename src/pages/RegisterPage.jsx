@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { register, getProducts, updateProduct, } from "../api/auth";
+import { useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../api/auth";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -10,53 +10,36 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [avatar, setAvatar] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
-    // getProfile() register({ name, email, password, avatar })  login({ email, password })  logout()
-
-    const { mutate, isPending, isError, error: mutationError, } = useMutation({
-        mutationFn: (product) => {
-            if (editingId !== null) {
-                return updateProduct({
-                    id: editingId,
-                    changes: product,
-                });
-            }
-            return register(name, email, password, avatar);
-        },
+    const registerMutation = useMutation({
+        mutationFn: register,
         onSuccess: () => {
-            setName("")
-            setEmail("")
-            setPassword("")
-            setAvatar("")
-            setEditingId(null);
+            navigate("/login", { replace: true });
         },
     });
 
-    const handleCancel = () => {
-        setName("")
-        setEmail("")
-        setPassword("")
-        setAvatar("")
-    };
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        setError("");
 
         if (password !== confirmPassword) {
-            setError('Пароли не совпадают')
-            return
+            setError("Пароли не совпадают");
+            return;
         }
 
-        setError('')
-        alert('Успешно!')
+        try {
+            await registerMutation.mutateAsync({
+                name: name.trim(),
+                email: email.trim(),
+                password: password.trim(),
+                avatar: avatar.trim(),
+            });
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
 
-        mutate({
-            name: name.trim(),
-            email: email.trim(),
-            password: password(price),
-            avatar: avatar.trim(),
-        });
-    };
 
     return (
         <section style={{ maxWidth: 420 }}>
@@ -65,11 +48,12 @@ export default function RegisterPage() {
             <form onSubmit={handleSubmit}>
                 <input
                     value={name}
-                    type='text'
+                    type="text"
                     placeholder="Имя"
                     autoComplete="name"
                     onChange={(event) => setName(event.target.value)}
-                    required />
+                    required
+                />
 
                 <input
                     value={email}
@@ -77,7 +61,8 @@ export default function RegisterPage() {
                     placeholder="Почта"
                     autoComplete="email"
                     onChange={(event) => setEmail(event.target.value)}
-                    required />
+                    required
+                />
 
                 <input
                     value={password}
@@ -85,7 +70,8 @@ export default function RegisterPage() {
                     placeholder="Пароль"
                     autoComplete="new-password"
                     onChange={(event) => setPassword(event.target.value)}
-                    required />
+                    required
+                />
 
                 <input
                     value={confirmPassword}
@@ -93,24 +79,28 @@ export default function RegisterPage() {
                     placeholder="Повторите пароль"
                     autoComplete="new-password"
                     onChange={(event) => setConfirmPassword(event.target.value)}
-                    required />
+                    required
+                />
 
                 <input
                     value={avatar}
                     type="url"
-                    placeholder="Ссылка на аватар"
+                    placeholder="Ссылка на аватар (необязательно)"
                     onChange={(event) => setAvatar(event.target.value)}
-                    required />
+                />
 
-                {name || email || password || avatar !== ("") && (
-                    <button type="button" onClick={handleCancel}>
-                        Отмена
-                    </button>
+                {(error || registerMutation.isError) && (
+                    <p style={{ color: "red" }}>
+                        {error}
+                        console.log({error && registerMutation.isError});
+                    </p>
                 )}
 
-                {error && <p style={{ color: 'red', margin: 0 }}>{error}</p>}
-
-                <button>Зарегистрироваться</button>
+                <button type="submit" disabled={registerMutation.isPending}>
+                    {registerMutation.isPending
+                        ? "Регистрируем..."
+                        : "Зарегистрироваться"}
+                </button>
             </form>
 
             <p>Уже есть аккаунт? <Link to="/login">Войти</Link></p>
