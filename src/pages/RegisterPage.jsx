@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { createProduct, getProducts, updateProduct, } from "../api/products";
+import { register, getProducts, updateProduct, } from "../api/auth";
 
 export default function RegisterPage() {
     const [name, setName] = useState("");
@@ -11,7 +11,7 @@ export default function RegisterPage() {
     const [avatar, setAvatar] = useState("");
     const [error, setError] = useState("");
 
-// getProfile() register({ name, email, password, avatar })  login({ email, password }  logout()
+    // getProfile() register({ name, email, password, avatar })  login({ email, password })  logout()
 
     const { mutate, isPending, isError, error: mutationError, } = useMutation({
         mutationFn: (product) => {
@@ -21,11 +21,13 @@ export default function RegisterPage() {
                     changes: product,
                 });
             }
-            return createProduct(product);
+            return register( name, email, password, avatar );
         },
         onSuccess: () => {
-            setTitle("");
-            setPrice("");
+            setName("")
+            setEmail("")
+            setPassword("")
+            setAvatar("")
             setEditingId(null);
         },
     });

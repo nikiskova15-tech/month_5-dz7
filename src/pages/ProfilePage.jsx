@@ -22,6 +22,8 @@ export default function ProfilePage() {
                 <p>Выдан {}</p>
                 <p>Истекает {}</p>
             </div>
+
+            <button>Выйти из аккаунта</button>
         </section>
     )
 }
