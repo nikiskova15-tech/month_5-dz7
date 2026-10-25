@@ -45,7 +45,7 @@ export default function ProfilePage() {
     }
 
     const profile = profileQuery.data;
-    const tokenData = decodeJwt(accessToken);
+    const tokenData = decodeJwt(accessToken); 
 
     return (
         <section>
@@ -75,14 +75,14 @@ export default function ProfilePage() {
 
             <div
                 style={{
-                    marginTop: 32,
+                    margin: 32,
                     padding: 16,
                     background: "#f1f5f9",
                     borderRadius: 8,
                 }}
             >
                 <h3>Данные access token</h3>
-                <p><b>ID пользователя:</b>{" "}{tokenData?.sub ?? tokenData?.id ?? "Нет данных"}</p>
+                <p><b>ID пользователя:</b>{tokenData?.sub ?? "Нет данных"}</p>
                 <p><b>Выдан:</b> {formatDate(tokenData?.iat)}</p>
                 <p><b>Истекает:</b> {formatDate(tokenData?.exp)}</p>
             </div>

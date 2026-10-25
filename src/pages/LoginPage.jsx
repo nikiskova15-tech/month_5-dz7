@@ -20,10 +20,11 @@ export default function LoginPage() {
     };
 
     return (
-        <section style={{ maxWidth: 380 }}>
+        <section >
             <h1>Вход</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}
+            style={{ display: 'flex', flexDirection: 'column', maxWidth: 500, gap: 15 }}>
                 <input
                     value={email}
                     type="email"

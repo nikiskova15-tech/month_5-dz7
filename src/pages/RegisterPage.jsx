@@ -40,12 +40,12 @@ export default function RegisterPage() {
         }
     }
 
-
     return (
-        <section style={{ maxWidth: 420 }}>
+        <section>
             <h1>Регистрация</h1>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}
+                style={{ display: 'flex', flexDirection: 'column', maxWidth: 1000, gap: 15 }}>
                 <input
                     value={name}
                     type="text"
@@ -85,8 +85,9 @@ export default function RegisterPage() {
                 <input
                     value={avatar}
                     type="url"
-                    placeholder="Ссылка на аватар (необязательно)"
+                    placeholder="Ссылка на аватар"
                     onChange={(event) => setAvatar(event.target.value)}
+                    required
                 />
 
                 {(error || registerMutation.isError) && (
