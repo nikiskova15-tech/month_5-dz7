@@ -50,7 +50,7 @@ export default function LoginPage() {
                 )}
 
                 <button type="submit" disabled={loginMutation.isPending}>
-                    {loginMutation.isPending ? "Входим..." : "Войти"}
+                    {loginMutation.isPending ? "Вход..." : "Войти"}
                 </button>
             </form>
 
